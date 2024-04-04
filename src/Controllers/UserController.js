@@ -127,31 +127,58 @@ const LoginUser = (req, res) => {
     errHandler(res, 2, 403);
     return;
   }
-  User.findOne({ email })
+  User.findOne({ email, password })
     .then((data) => {
       let { name, email, phoneNumber, _id, createdAt, role, verified } = data;
-      let token = jsonwebtoken.sign(
-        {
+      if (verified) {
+        let token = jsonwebtoken.sign(
+          {
+            name,
+            email,
+            phoneNumber,
+            _id,
+            createdAt,
+            role,
+            verified,
+          },
+          process.env.SECRET_KEY
+        );
+        responseHandler(res, {
           name,
           email,
-          phoneNumber,
           _id,
           createdAt,
+          token,
+          phoneNumber,
           role,
           verified,
-        },
-        process.env.SECRET_KEY
-      );
-      responseHandler(res, {
-        name,
-        email,
-        _id,
-        createdAt,
-        token,
-        phoneNumber,
-        role,
-        verified,
-      });
+        });
+      } else {
+        let token = jsonwebtoken.sign(
+          {
+            name,
+            email,
+            phoneNumber,
+            _id,
+            createdAt,
+            role,
+            verified,
+          },
+          process.env.SECRET_KEY
+        );
+        const otp = Math.floor(1000 + Math.random() * 9000);
+        sendMail(email, { name, otp }, _id);
+        responseHandler(res, {
+          name,
+          email,
+          _id,
+          createdAt,
+          token,
+          phoneNumber,
+          role,
+          verified,
+        });
+      }
     })
     .catch((err) => {
       errHandler(res, 5, 409);
