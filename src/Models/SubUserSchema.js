@@ -189,7 +189,6 @@ const SubUserJobSchema = new mongoose.Schema(
 );
 
 const SubUserFoodVendorSchema = new mongoose.Schema(
-  
   {
     userId: {
       type: String,
