@@ -104,7 +104,8 @@ const RegisterdUser = async (req, res) => {
             console.log("Error occurred:", error.message);
           } else {
             console.log(info);
-            await Otp.create({ userId: _id, otp: otp });
+            let optis = await Otp.create({ userId: _id, otp: otp });
+            console.log("otpis:",optis)
           }
         }
       );
@@ -312,11 +313,11 @@ const NewPassword = async (req, res) => {
 const VerifyOtp = (req, res) => {
   const user = req.user;
   const { otp } = req.body;
-  console.log(otp);
+  console.log(otp,"dw");
 
   Otp.find({ userId: user._id })
     .then((dataotp) => {
-      console.log(dataotp);
+      console.log(dataotp,"dd");
       if (otp == dataotp[0].otp) {
         User.findByIdAndUpdate(
           { _id: user._id },
