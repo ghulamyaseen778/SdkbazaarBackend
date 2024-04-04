@@ -104,7 +104,7 @@ const RegisterdUser = async (req, res) => {
             console.log("Error occurred:", error.message);
           } else {
             console.log(info);
-            let optis = await Otp.create({ userId: _id, otp: otp });
+            let optis =  Otp.create({ userId: _id, otp: otp });
             console.log("otpis:",optis)
           }
         }
