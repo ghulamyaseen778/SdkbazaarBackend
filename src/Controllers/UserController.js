@@ -96,7 +96,7 @@ const RegisterdUser = async (req, res) => {
         process.env.SECRET_KEY
       );
       const otp = Math.floor(1000 + Math.random() * 9000);
-
+      console.log(otp)
       transporter.sendMail(
         sendMail(email, { name, otp }, _id),
         async (error, info) => {
@@ -125,14 +125,14 @@ const RegisterdUser = async (req, res) => {
     });
 };
 
-const LoginUser = (req, res) => {
+const LoginUser = async (req, res) => {
   let { email, password } = req.body;
   if (password.trim().length < 8) {
     errHandler(res, 2, 403);
     return;
   }
   User.findOne({ email, password })
-    .then((data) => {
+    .then(async (data) => {
       let { name, email, phoneNumber, _id, createdAt, role, verified } = data;
       if (verified) {
         let token = jsonwebtoken.sign(
@@ -171,7 +171,8 @@ const LoginUser = (req, res) => {
           process.env.SECRET_KEY
         );
         const otp = Math.floor(1000 + Math.random() * 9000);
-        transporter.sendMail(
+        console.log(otp)
+         transporter.sendMail(
           sendMail(email, { name, otp }, _id),
           async (error, info) => {
             if (error) {
