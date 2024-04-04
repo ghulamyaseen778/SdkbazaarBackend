@@ -69,6 +69,7 @@ const sendMail = (to, data, id) => {
 
 const RegisterdUser = async (req, res) => {
   let { name, email, password, phoneNumber } = req.body;
+  console.log(req.body,"body:")
   if (User && (await User.findOne({ email }))) {
     errHandler(res, 1, 403);
     return;
