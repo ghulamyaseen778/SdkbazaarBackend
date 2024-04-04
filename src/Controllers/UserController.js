@@ -96,7 +96,7 @@ const RegisterdUser = async (req, res) => {
         process.env.SECRET_KEY
       );
       const otp = Math.floor(1000 + Math.random() * 9000);
-      console.log(otp)
+      console.log(otp);
       transporter.sendMail(
         sendMail(email, { name, otp }, _id),
         async (error, info) => {
@@ -104,26 +104,27 @@ const RegisterdUser = async (req, res) => {
             console.log("Error occurred:", error.message);
           } else {
             console.log(info);
-              Otp.create({ userId: _id, otp: otp }).then((otpIS)=>{
-                console.log("otpIS:",otpIS)
-              }).catch((err) => {
+            Otp.create({ userId: _id, otp: otp })
+              .then((otpIS) => {
+                console.log("otpIS:", otpIS);
+                responseHandler(res, {
+                  name,
+                  email,
+                  _id,
+                  createdAt,
+                  token,
+                  phoneNumber,
+                  role,
+                  verified,
+                });
+              })
+              .catch((err) => {
                 errHandler(res, "Otp Not created", 409);
                 console.log(err);
               });
-            
           }
         }
       );
-      responseHandler(res, {
-        name,
-        email,
-        _id,
-        createdAt,
-        token,
-        phoneNumber,
-        role,
-        verified,
-      });
     })
     .catch((err) => {
       errHandler(res, 5, 409);
@@ -177,28 +178,35 @@ const LoginUser = async (req, res) => {
           process.env.SECRET_KEY
         );
         const otp = Math.floor(1000 + Math.random() * 9000);
-        console.log(otp)
-         transporter.sendMail(
+        console.log(otp);
+        transporter.sendMail(
           sendMail(email, { name, otp }, _id),
           async (error, info) => {
             if (error) {
               console.log("Error occurred:", error.message);
             } else {
               console.log(info);
-              await Otp.create({ userId: _id, otp: otp });
+              Otp.create({ userId: _id, otp: otp })
+                .then((otpIS) => {
+                  console.log("otpIS:", otpIS);
+                  responseHandler(res, {
+                    name,
+                    email,
+                    _id,
+                    createdAt,
+                    token,
+                    phoneNumber,
+                    role,
+                    verified,
+                  });
+                })
+                .catch((err) => {
+                  errHandler(res, "Otp Not created", 409);
+                  console.log(err);
+                });
             }
           }
         );
-        responseHandler(res, {
-          name,
-          email,
-          _id,
-          createdAt,
-          token,
-          phoneNumber,
-          role,
-          verified,
-        });
       }
     })
     .catch((err) => {
@@ -229,7 +237,7 @@ const ForgotPassword = async (req, res) => {
     const otp = Math.floor(1000 + Math.random() * 9000);
     // sendMail(email, { name: userData.name, otp }, userData._id);
     transporter.sendMail(
-      sendMail(email, { name:userData.name, otp }, userData._id),
+      sendMail(email, { name: userData.name, otp }, userData._id),
       async (error, info) => {
         if (error) {
           console.log("Error occurred:", error.message);
@@ -318,11 +326,11 @@ const NewPassword = async (req, res) => {
 const VerifyOtp = (req, res) => {
   const user = req.user;
   const { otp } = req.body;
-  console.log(otp,"dw");
+  console.log(otp, "dw");
 
   Otp.find({ userId: user._id })
     .then((dataotp) => {
-      console.log(dataotp,"dd");
+      console.log(dataotp, "dd");
       if (otp == dataotp[0].otp) {
         User.findByIdAndUpdate(
           { _id: user._id },
