@@ -51,25 +51,17 @@ const sendMail = (to, data, id) => {
   </tbody>
 </table>
 </body>`;
-  const mailOptions = {
+  return {
     from: "muhammadyaseen3294@gmail.com",
     to: to,
     subject: "These was recived by SDK App || Please verify your self",
     html: html,
   };
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.log("Error occurred:", error.message);
-    } else {
-      console.log(info);
-      Otp.create({ userId: id, otp: data.otp });
-    }
-  });
 };
 
 const RegisterdUser = async (req, res) => {
   let { name, email, password, phoneNumber } = req.body;
-  console.log(req.body,"body:")
+  console.log(req.body, "body:");
   if (User && (await User.findOne({ email }))) {
     errHandler(res, 1, 403);
     return;
@@ -104,7 +96,18 @@ const RegisterdUser = async (req, res) => {
         process.env.SECRET_KEY
       );
       const otp = Math.floor(1000 + Math.random() * 9000);
-      sendMail(email, { name, otp }, _id);
+
+      transporter.sendMail(
+        sendMail(email, { name, otp }, _id),
+        async (error, info) => {
+          if (error) {
+            console.log("Error occurred:", error.message);
+          } else {
+            console.log(info);
+            await Otp.create({ userId: _id, otp: otp });
+          }
+        }
+      );
       responseHandler(res, {
         name,
         email,
@@ -168,7 +171,17 @@ const LoginUser = (req, res) => {
           process.env.SECRET_KEY
         );
         const otp = Math.floor(1000 + Math.random() * 9000);
-        sendMail(email, { name, otp }, _id);
+        transporter.sendMail(
+          sendMail(email, { name, otp }, _id),
+          async (error, info) => {
+            if (error) {
+              console.log("Error occurred:", error.message);
+            } else {
+              console.log(info);
+              await Otp.create({ userId: _id, otp: otp });
+            }
+          }
+        );
         responseHandler(res, {
           name,
           email,
@@ -207,7 +220,18 @@ const ForgotPassword = async (req, res) => {
 
   User.findOne({ email }).then((userData) => {
     const otp = Math.floor(1000 + Math.random() * 9000);
-    sendMail(email, { name: userData.name, otp }, userData._id);
+    // sendMail(email, { name: userData.name, otp }, userData._id);
+    transporter.sendMail(
+      sendMail(email, { name:userData.name, otp }, userData._id),
+      async (error, info) => {
+        if (error) {
+          console.log("Error occurred:", error.message);
+        } else {
+          console.log(info);
+          await Otp.create({ userId: userData._id, otp: otp });
+        }
+      }
+    );
     User.findByIdAndUpdate(
       { _id: userData._id },
       { verified: false },
