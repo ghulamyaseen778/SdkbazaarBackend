@@ -6,6 +6,7 @@ import {
   NewPassword,
   RegisterdUser,
   VerifyOtp,
+  getUser,
 } from "../Controllers/UserController.js";
 import { checkToken } from "../Middleware/index.js";
 import {
@@ -28,7 +29,7 @@ const route = express.Router();
 
 route.route("/registerd").post(RegisterdUser);
 route.route("/login").post(LoginUser);
-route.route("/user").put(checkToken, MakeVendor);
+route.route("/user").put(checkToken, MakeVendor).get(checkToken,getUser)
 route.route("/verify").post(checkToken, VerifyOtp);
 route.route("/forgot").post(ForgotPassword);
 route.route("/newpassword").post(checkToken, NewPassword);

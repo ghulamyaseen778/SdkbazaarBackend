@@ -225,6 +225,16 @@ const MakeVendor = (req, res) => {
     });
 };
 
+const getUser = (req,res) =>{
+  const user = req.user;
+  User.find({_id:user._id}) .then((data) => {
+    responseHandler(res, data);
+  })
+  .catch((err) => {
+    errHandler(res, 5, 409);
+  });
+}
+
 const ForgotPassword = async (req, res) => {
   const { email } = req.body;
   console.log(email);
@@ -389,4 +399,5 @@ export {
   VerifyOtp,
   ForgotPassword,
   NewPassword,
+  getUser
 };
