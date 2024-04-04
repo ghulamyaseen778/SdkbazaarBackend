@@ -8,7 +8,7 @@ import {
   VerifyOtp,
   getUser,
 } from "../Controllers/UserController.js";
-import { checkToken } from "../Middleware/index.js";
+import { checkToken, upload } from "../Middleware/index.js";
 import {
   CreateSubUserFoodVendor,
   CreateSubUserJob,
@@ -22,6 +22,7 @@ import {
   getOrder,
 } from "../Controllers/CreateOrderController.js";
 import { GetNearByResturant } from "../Controllers/NearByController.js";
+import { imageUpload } from "../Controllers/ImageController.js";
 
 const route = express.Router();
 
@@ -33,6 +34,7 @@ route.route("/user").put(checkToken, MakeVendor).get(checkToken,getUser)
 route.route("/verify").post(checkToken, VerifyOtp);
 route.route("/forgot").post(ForgotPassword);
 route.route("/newpassword").post(checkToken, NewPassword);
+route.route("/image").post(upload.single("file"), imageUpload);
 
 //Sub User Job----------------------------------
 route
