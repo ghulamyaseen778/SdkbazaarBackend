@@ -49,7 +49,7 @@ route
 //Sub User Marige Buera----------------------------------
 
 route
-  .route("/user/foodvendor")
+  .route("/user/bureau")
   .get(checkToken,getSubUserBureau)
   .post(checkToken, CreateSubUserBureau)
   .put(checkToken, EditSubUserBureau);
