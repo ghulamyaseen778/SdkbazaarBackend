@@ -10,10 +10,13 @@ import {
 } from "../Controllers/UserController.js";
 import { checkToken, upload } from "../Middleware/index.js";
 import {
+  CreateSubUserBureau,
   CreateSubUserFoodVendor,
   CreateSubUserJob,
+  EditSubUserBureau,
   EditSubUserFoodVendor,
   EditSubUserJob,
+  getSubUserBureau,
   getSubUserFoodVendor,
   getSubUserJob,
 } from "../Controllers/SubUserController.js";
@@ -39,15 +42,23 @@ route.route("/image").post(upload.single("file"), imageUpload);
 //Sub User Job----------------------------------
 route
   .route("/user/job")
-  .get(getSubUserJob)
+  .get(checkToken,getSubUserJob)
   .post(checkToken, CreateSubUserJob)
   .put(checkToken, EditSubUserJob);
+
+//Sub User Marige Buera----------------------------------
+
+route
+  .route("/user/foodvendor")
+  .get(checkToken,getSubUserBureau)
+  .post(checkToken, CreateSubUserBureau)
+  .put(checkToken, EditSubUserBureau);
 
 //Sub User Food Vendor----------------------------------
 
 route
   .route("/user/foodvendor")
-  .get(getSubUserFoodVendor)
+  .get(checkToken,getSubUserFoodVendor)
   .post(checkToken, CreateSubUserFoodVendor)
   .put(checkToken, EditSubUserFoodVendor);
 
