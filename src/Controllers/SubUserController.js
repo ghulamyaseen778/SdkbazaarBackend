@@ -50,7 +50,8 @@ const CreateSubUserFoodVendor = (req, res) => {
 //---------------getting--------------------
 
 const getSubUserJob = (req, res) => {
-  let { userId, id, phone } = req.query;
+  let { userId, id, phone, on } = req.query;
+  let { _id } = req.user;
   let obj = {};
   if (id) {
     obj._id = id;
@@ -60,6 +61,9 @@ const getSubUserJob = (req, res) => {
   }
   if (phone) {
     obj.phone = phone;
+  }
+  if (on == "1") {
+    obj._id = _id;
   }
   SubUserJob.find(obj)
     .then((data) => {
@@ -70,7 +74,8 @@ const getSubUserJob = (req, res) => {
     });
 };
 const getSubUserBureau = (req, res) => {
-  let { userId, id, phone } = req.query;
+  let { userId, id, phone, on } = req.query;
+  let { _id } = req.user;
   let obj = {};
   if (id) {
     obj._id = id;
@@ -80,6 +85,9 @@ const getSubUserBureau = (req, res) => {
   }
   if (phone) {
     obj.phone = phone;
+  }
+  if (on == "1") {
+    obj._id = _id;
   }
   SubUserBureau.find(obj)
     .then((data) => {
@@ -90,7 +98,8 @@ const getSubUserBureau = (req, res) => {
     });
 };
 const getSubUserFoodVendor = (req, res) => {
-  let { userId, id, phone } = req.query;
+  let { userId, id, phone, on } = req.query;
+  let { _id } = req.user;
   let obj = {};
   if (id) {
     obj._id = id;
@@ -100,6 +109,9 @@ const getSubUserFoodVendor = (req, res) => {
   }
   if (phone) {
     obj.phone = phone;
+  }
+  if (on == "1") {
+    obj._id = _id;
   }
   SubUserFood.find(obj)
     .then((data) => {
