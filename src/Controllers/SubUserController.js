@@ -20,6 +20,7 @@ const CreateSubUserJob = (req, res) => {
       console.log(err, "CreateSubUserJob"), errHandler(res, 5, 403);
     });
 };
+
 const CreateSubUserBureau = (req, res) => {
   let body = req.body;
   let { id } = req.user;
@@ -32,6 +33,7 @@ const CreateSubUserBureau = (req, res) => {
       console.log(err, "CreateSubUserBureau"), errHandler(res, 5, 403);
     });
 };
+
 const CreateSubUserFoodVendor = (req, res) => {
   let body = req.body;
   let { id } = req.user;
@@ -41,7 +43,7 @@ const CreateSubUserFoodVendor = (req, res) => {
       responseHandler(res, data);
     })
     .catch((err) => {
-      console.log(err, "CreateSubUserFoodVendor"), errHandler(res, 5, 403);
+      console.log(err, "CreateSubUqserFoodVendor"), errHandler(res, 5, 403);
     });
 };
 

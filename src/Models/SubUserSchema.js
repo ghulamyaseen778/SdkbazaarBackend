@@ -144,9 +144,6 @@ const SubUserJobSchema = new mongoose.Schema(
     companyName: {
       type: String,
     },
-    companyName: {
-      type: String,
-    },
     companyWebsite: {
       type: String,
     },
