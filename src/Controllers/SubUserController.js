@@ -68,7 +68,7 @@ const getSubUserJob = (req, res) => {
   if (on == "1") {
     obj.userId = _id;
   }
-  if (ne=="1") {
+  if (ne == "1") {
     obj.userId = { $ne: _id };
   }
   SubUserJob.find(obj)
@@ -95,7 +95,7 @@ const getSubUserBureau = (req, res) => {
   if (on == "1") {
     obj.userId = _id;
   }
-  if (ne=="1") {
+  if (ne == "1") {
     obj.userId = { $ne: _id };
   }
   SubUserBureau.find(obj)
@@ -122,7 +122,7 @@ const getSubUserFoodVendor = (req, res) => {
   if (on == "1") {
     obj.userId = _id;
   }
-  if (ne=="1") {
+  if (ne == "1") {
     obj.userId = { $ne: _id };
   }
   console.log(req.user);
@@ -149,6 +149,7 @@ const EditSubUserJob = (req, res) => {
       errHandler(res, 5, 403);
     });
 };
+
 const EditSubUserFoodVendor = (req, res) => {
   const body = req.body;
   const { _id } = req.user;
@@ -161,6 +162,7 @@ const EditSubUserFoodVendor = (req, res) => {
       errHandler(res, 5, 403);
     });
 };
+
 const EditSubUserBureau = (req, res) => {
   const body = req.body;
   const { _id } = req.user;
