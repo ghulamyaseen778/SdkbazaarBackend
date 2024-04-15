@@ -67,8 +67,4 @@ route.route("/order").post(checkToken, OrderCreated).get(getOrder);
 route.route("/nearby").get(GetNearByResturant);
 //BoatsRoutes--------------------------------
 
-// route.route("/boat").get(getAllBoats);
-// route.route("/createboat").post(checkToken, CreateBoat);
-// route.route("/updateboat").post(checkToken, UpdateBoat);
-
 export default route;
