@@ -66,7 +66,7 @@ const getSubUserJob = (req, res) => {
     obj.phone = phone;
   }
   if (on == "1") {
-    obj._id = _id;
+    obj.userId = _id;
   }
   SubUserJob.find(obj)
     .then((data) => {
@@ -90,7 +90,7 @@ const getSubUserBureau = (req, res) => {
     obj.phone = phone;
   }
   if (on == "1") {
-    obj._id = _id;
+    obj.userId = _id;
   }
   SubUserBureau.find(obj)
     .then((data) => {
@@ -114,7 +114,7 @@ const getSubUserFoodVendor = (req, res) => {
     obj.phone = phone;
   }
   if (on == "1") {
-    obj._id = _id;
+    obj.userId = _id;
   }
   console.log(req.user)
   SubUserFood.find(obj)
