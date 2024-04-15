@@ -197,11 +197,9 @@ const SubUserFoodVendorSchema = new mongoose.Schema(
     },
     gender: {
       type: String,
-      required: true,
     },
     dob: {
       type: String,
-      required: true,
     },
     phone: {
       type: String,
