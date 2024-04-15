@@ -33,16 +33,17 @@ const route = express.Router();
 
 route.route("/registerd").post(RegisterdUser);
 route.route("/login").post(LoginUser);
-route.route("/user").put(checkToken, MakeVendor).get(checkToken,getUser)
+route.route("/user").put(checkToken, MakeVendor).get(checkToken, getUser);
 route.route("/verify").post(checkToken, VerifyOtp);
 route.route("/forgot").post(ForgotPassword);
 route.route("/newpassword").post(checkToken, NewPassword);
 route.route("/image").post(upload.single("file"), imageUpload);
 
 //Sub User Job----------------------------------
+
 route
   .route("/user/job")
-  .get(checkToken,getSubUserJob)
+  .get(checkToken, getSubUserJob)
   .post(checkToken, CreateSubUserJob)
   .put(checkToken, EditSubUserJob);
 
@@ -50,7 +51,7 @@ route
 
 route
   .route("/user/bureau")
-  .get(checkToken,getSubUserBureau)
+  .get(checkToken, getSubUserBureau)
   .post(checkToken, CreateSubUserBureau)
   .put(checkToken, EditSubUserBureau);
 
@@ -58,12 +59,12 @@ route
 
 route
   .route("/user/foodvendor")
-  .get(checkToken,getSubUserFoodVendor)
+  .get(checkToken, getSubUserFoodVendor)
   .post(checkToken, CreateSubUserFoodVendor)
   .put(checkToken, EditSubUserFoodVendor);
 
 route.route("/order").post(checkToken, OrderCreated).get(getOrder);
-route.route("/nearby").get(GetNearByResturant)
+route.route("/nearby").get(GetNearByResturant);
 //BoatsRoutes--------------------------------
 
 // route.route("/boat").get(getAllBoats);
