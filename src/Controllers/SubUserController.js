@@ -116,6 +116,7 @@ const getSubUserFoodVendor = (req, res) => {
   if (on == "1") {
     obj._id = _id;
   }
+  console.log(req.user)
   SubUserFood.find(obj)
     .then((data) => {
       responseHandler(res, data);
