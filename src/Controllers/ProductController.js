@@ -1,5 +1,5 @@
 import { Product } from "../Models/ProductsSchem.js";
-import { errHandler, responseHandler } from "../helper/response";
+import { errHandler, responseHandler } from "../helper/response.js";
 
 const CreateProduct = (req, res) => {
   const body = req.body;
