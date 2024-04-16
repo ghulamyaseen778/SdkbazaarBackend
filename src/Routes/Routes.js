@@ -26,6 +26,7 @@ import {
 } from "../Controllers/CreateOrderController.js";
 import { GetNearByResturant } from "../Controllers/NearByController.js";
 import { imageUpload } from "../Controllers/ImageController.js";
+import { CreateProduct, GetProduct } from "../Controllers/ProductController.js";
 
 const route = express.Router();
 
@@ -65,6 +66,8 @@ route
 
 route.route("/order").post(checkToken, OrderCreated).get(getOrder);
 route.route("/nearby").get(GetNearByResturant);
-//BoatsRoutes--------------------------------
+//ProductRoutes--------------------------------
+
+route.route("/product").post(CreateProduct).get(GetProduct);
 
 export default route;
