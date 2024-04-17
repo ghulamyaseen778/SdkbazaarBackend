@@ -179,6 +179,22 @@ const SubUserJobSchema = new mongoose.Schema(
       required: true,
       enum: ["employer", "freelancer"],
     },
+    latitude: {
+      type: String,
+      required: true,
+    },
+    longitude: {
+      type: String,
+      required: true,
+    },
+    categoryId: {
+      type: String,
+      // required: true,
+    },
+    subCategoryId: {
+      type: String,
+      // required: true,
+    }
   },
   {
     timestamps: true,
