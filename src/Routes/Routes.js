@@ -27,6 +27,12 @@ import {
 import { GetNearByResturant } from "../Controllers/NearByController.js";
 import { imageUpload } from "../Controllers/ImageController.js";
 import { CreateProduct, GetProduct } from "../Controllers/ProductController.js";
+import {
+  CreateCategory,
+  CreateSubCategory,
+  GetCategory,
+  GetSubCategory,
+} from "../Controllers/CategoryController.js";
 
 const route = express.Router();
 
@@ -69,5 +75,8 @@ route.route("/nearby").get(GetNearByResturant);
 //ProductRoutes--------------------------------
 
 route.route("/product").post(CreateProduct).get(GetProduct);
+
+route.route("/category").get(GetCategory).post(CreateCategory);
+route.route("/subcategory").get(GetSubCategory).post(CreateSubCategory);
 
 export default route;
