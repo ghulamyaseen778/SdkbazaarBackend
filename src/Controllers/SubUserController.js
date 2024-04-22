@@ -53,7 +53,7 @@ const CreateSubUserFoodVendor = (req, res) => {
 //---------------getting--------------------
 
 const getSubUserJob = (req, res) => {
-  let { userId, id, phone, on, ne } = req.query;
+  let { userId, id, phone, on, ne,categoryId,subCategoryId } = req.query;
   let { _id } = req.user;
   let obj = {};
   if (id) {
@@ -70,6 +70,12 @@ const getSubUserJob = (req, res) => {
   }
   if (ne == "1") {
     obj.userId = { $ne: _id };
+  }
+  if (categoryId) {
+    obj.categoryId = categoryId;
+  }
+  if (subCategoryId) {
+    obj.subCategoryId = subCategoryId;
   }
   SubUserJob.find(obj)
     .then((data) => {
