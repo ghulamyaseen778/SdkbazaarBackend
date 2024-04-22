@@ -190,11 +190,17 @@ const SubUserJobSchema = new mongoose.Schema(
     categoryId: {
       type: String,
       // required: true,
+      default: "",
     },
     subCategoryId: {
       type: String,
       // required: true,
-    }
+      default: "",
+    },
+    CNIC: {
+      type: Object,
+      default: {},
+    },
   },
   {
     timestamps: true,
