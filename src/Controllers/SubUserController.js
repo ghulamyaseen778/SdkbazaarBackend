@@ -10,8 +10,8 @@ import { errHandler, responseHandler } from "../helper/response.js";
 
 const CreateSubUserJob = (req, res) => {
   let body = req.body;
-  let { id } = req.user;
-  SubUserJob.create({ ...body, userId: id })
+  let { id, name,email } = req.user;
+  SubUserJob.create({ ...body, userId: id, name: name,email })
     .then(async (data) => {
       await User.findByIdAndUpdate(id, { role: "job" }, { new: true });
       responseHandler(res, data);
@@ -53,7 +53,8 @@ const CreateSubUserFoodVendor = (req, res) => {
 //---------------getting--------------------
 
 const getSubUserJob = (req, res) => {
-  let { userId, id, phone, on, ne,categoryId,subCategoryId } = req.query;
+  let { userId, id, phone, on, ne, categoryId, subCategoryId, jobUserType } =
+    req.query;
   let { _id } = req.user;
   let obj = {};
   if (id) {
@@ -76,6 +77,9 @@ const getSubUserJob = (req, res) => {
   }
   if (subCategoryId) {
     obj.subCategoryId = subCategoryId;
+  }
+  if (jobUserType) {
+    obj.jobUserType = jobUserType;
   }
   SubUserJob.find(obj)
     .then((data) => {
