@@ -5,6 +5,10 @@ const CategorySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  type: {
+    type: String,
+    required: true, //product,job,etc
+  },
 });
 
 const SubCategorySchema = new mongoose.Schema({

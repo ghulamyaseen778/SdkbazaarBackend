@@ -24,7 +24,7 @@ import {
   OrderCreated,
   getOrder,
 } from "../Controllers/CreateOrderController.js";
-import { GetNearByResturant } from "../Controllers/NearByController.js";
+import { GetNearByJobUser, GetNearByResturant } from "../Controllers/NearByController.js";
 import { imageUpload } from "../Controllers/ImageController.js";
 import { CreateProduct, GetProduct } from "../Controllers/ProductController.js";
 import {
@@ -72,6 +72,7 @@ route
 
 route.route("/order").post(checkToken, OrderCreated).get(getOrder);
 route.route("/nearby").get(GetNearByResturant);
+route.route("/nearby/job").get(GetNearByJobUser);
 //ProductRoutes--------------------------------
 
 route.route("/product").post(CreateProduct).get(GetProduct);
