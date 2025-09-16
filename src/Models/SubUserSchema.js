@@ -58,7 +58,7 @@ const SubUserBureauSchema = new mongoose.Schema(
     interest: {
       type: String,
       required: true,
-      enum: ["male", "female"],
+      // enum: ["male", "female"],
     },
     religon: {
       type: String,
@@ -69,7 +69,7 @@ const SubUserBureauSchema = new mongoose.Schema(
       required: true,
     },
     height: {
-      type: Number,
+      type: String,
       required: true,
     },
     weight: {
